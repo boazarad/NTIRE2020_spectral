@@ -1,6 +1,7 @@
 import os
 import cv2 as cv
 import numpy as np
+from scipy.io import savemat
 
 
 JPG_QUALITY = 80
@@ -136,3 +137,13 @@ def savePNG(im, path):
     imBGR = cv.cvtColor(im8, cv.COLOR_RGB2BGR)
     return cv.imwrite(path, imBGR, [cv.IMWRITE_PNG_COMPRESSION, PNG_COMPRESSION])
 
+
+def saveReconstructedHSI(hsIm, path):
+    """
+    Save the reconstructed hyperspectral image into .mat file.
+    :param hsIm: hyperspectral image (H x W x S).
+    :param path: full output path to image file name
+    """
+    
+    # variable name = "cube"
+    savemat(path, {"cube": hsIm})
